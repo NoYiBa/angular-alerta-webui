@@ -7,11 +7,19 @@ var alertaApp = angular.module('alertaApp', [
   'alertaFilters',
   'alertaServices',
   'alertaDirectives',
-  'alertaControllers'
+  'alertaControllers',
+  'angularOauth'
 ])
 
-alertaApp.config(['$routeProvider',
-  function($routeProvider) {
+alertaApp.config(['oauthConfigProvider', '$routeProvider',
+  function(oauthConfigProvider, $routeProvider) {
+    oauthConfigProvider
+    .configure({
+        authUrl: 'https://accounts.google.com/o/oauth2/auth',
+        clientId: '670909444171-la87bi7biqd7bdhv9vq5r05d76mpstrb.apps.googleusercontent.com',
+        clientSecret: 'Qg8kZMUhvpfrCyUiCwEhSWXr',
+        verifyUrl: 'https://www.googleapis.com/oauth2/v1/tokeninfo'
+    });
     $routeProvider
     .when('/alerts', {
       templateUrl: 'partials/alert-list.html',
@@ -39,4 +47,3 @@ alertaApp.config(['$routeProvider',
       redirectTo: '/alerts'
     });
   }]);
-
